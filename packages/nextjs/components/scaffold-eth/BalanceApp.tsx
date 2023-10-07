@@ -8,7 +8,7 @@ type TBalanceProps = {
 /**
  * Display (ETH & USD) balance of an ETH address.
  */
-export const BalanceApp = ({ className = "" }: TBalanceProps) => {
+export const BalanceApp = () => {
   const configuredNetwork = getTargetNetwork();
   const { balance, price, isError, isLoading, onToggleBalance, isEthBalance } = useAccountBalanceComunity();
 
@@ -32,19 +32,16 @@ export const BalanceApp = ({ className = "" }: TBalanceProps) => {
   }
 
   return (
-    <button
-      className={`btn btn-sm btn-ghost flex flex-col font-normal items-center hover:bg-transparent ${className}`}
-      onClick={onToggleBalance}
-    >
+    <button onClick={onToggleBalance}>
       <div className="w-full flex items-center justify-center">
         {isEthBalance ? (
           <>
             <span>{balance ? balance?.toFixed(4) : 0}</span>
-            <span className="text-[0.8em] font-bold ml-1">{configuredNetwork.nativeCurrency.symbol}</span>
+            <span>{configuredNetwork.nativeCurrency.symbol}</span>
           </>
         ) : (
           <>
-            <span className="text-[0.8em] font-bold mr-1">$</span>
+            <span>$</span>
             <span>{balance ? (balance * price).toFixed(2) : 0}</span>
           </>
         )}

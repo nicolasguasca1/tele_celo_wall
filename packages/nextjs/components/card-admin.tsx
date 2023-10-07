@@ -17,7 +17,7 @@ export const CardAdmin = ({ cardId, title }: CardAdmin) => {
 
   return (
     <div
-      className="card w-96 bg-neutral text-neutral-content m-5"
+      className="card w-96 bg-base-100 shadow-xl m-5"
       onClick={() => router.push(`/blockexplorer/address/${deployedContractData.address}?idDerrama=${cardId}`)}
     >
       <div className="card-body items-center text-center">

@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import { useAccount } from "wagmi";
 import { BalanceComunity } from "~~/components/BalanceComunity";
+import { BalanceContent } from "~~/components/BalanceContent";
 import { BalanceUser } from "~~/components/BalanceUser";
 import { MetaHeader } from "~~/components/MetaHeader";
 import { Card } from "~~/components/card";
@@ -16,8 +17,7 @@ const ExampleUI: NextPage = () => {
         <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree&display=swap" rel="stylesheet" />
       </MetaHeader>
       <div className="" data-theme="">
-        <BalanceComunity />
-        <BalanceUser />
+        <BalanceContent isAdmin={false} />
         <a className="btn btn-primary" href={`/blockexplorer/address/${address}`}>
           Mis pagos
         </a>

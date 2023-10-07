@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import { BalanceComunity } from "~~/components/BalanceComunity";
+import { BalanceContent } from "~~/components/BalanceContent";
 import { MetaHeader } from "~~/components/MetaHeader";
 import { CardAdmin } from "~~/components/card-admin";
 
@@ -15,7 +15,7 @@ const Admin: NextPage = () => {
         <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree&display=swap" rel="stylesheet" />
       </MetaHeader>
       <div className="" data-theme="">
-        <BalanceComunity />
+        <BalanceContent isAdmin={true} />
         <div className="flex justify-center content-around flex-wrap">
           <CardAdmin cardId={"1234"} title={"Ascensor"} />
           <CardAdmin cardId={"8907"} title={"Piscinal"} />
