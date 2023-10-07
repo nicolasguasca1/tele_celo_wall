@@ -14,11 +14,15 @@ import "hardhat/console.sol";
  */
 contract YourContract {
 	// State Variables
+	uint256 numVecinos = 5;
 	address public immutable owner;
 	string public greeting = "Building Unstoppable Apps!!!";
 	bool public premium = false;
 	uint256 public totalCounter = 0;
 	mapping(address => uint) public userGreetingCounter;
+	mapping(address => mapping (string => string)) votes;
+	mapping(string => uint256) votesPositive;
+
 
 	// Events: a way to emit log statements from smart contract that can be listened to by external parties
 	event GreetingChange(
@@ -33,6 +37,7 @@ contract YourContract {
 	constructor(address _owner) {
 		owner = _owner;
 	}
+
 
 	// Modifier: used to define a set of rules that must be met before or after a function is executed
 	// Check the withdraw() function
@@ -54,6 +59,7 @@ contract YourContract {
 			_newGreeting,
 			msg.sender
 		);
+
 
 		// Change state variables
 		greeting = _newGreeting;
@@ -84,4 +90,35 @@ contract YourContract {
 	 * Function that allows the contract to receive ETH
 	 */
 	receive() external payable {}
+
+
+	/**
+	 * Function that save a vote
+	 */
+
+	function saveVote(string memory _vote, string memory _idVote) public {
+		votes[msg.sender][_idVote] = _vote;
+		console.log(
+			"Se ha votado '%s'",
+			_vote
+		);
+		if(keccak256(abi.encodePacked("OK")) == keccak256(abi.encodePacked(_vote))) {
+			votesPositive[_idVote] = votesPositive[_idVote]++;
+		}
+	}
+
+	 /**
+	  * Function that get a vote
+	  */
+	function getVote(address _msgAddress, string memory _idVote) public view returns (string memory) {
+		return votes[_msgAddress][_idVote];
+	}
+
+	function newVote(string memory _idVote) public {
+		votesPositive[_idVote] = 0;
+	}
+
+	function resultVote(string memory _idVote) view public returns(uint) {
+		return votesPositive[_idVote];
+	}
 }
