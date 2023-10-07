@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
 import { useAccount } from "wagmi";
+import { ActionsUser } from "~~/components/ActionUser";
 import { BalanceComunity } from "~~/components/BalanceComunity";
 import { BalanceContent } from "~~/components/BalanceContent";
 import { BalanceUser } from "~~/components/BalanceUser";
@@ -8,7 +9,6 @@ import { Card } from "~~/components/card";
 import { Pay } from "~~/components/pay";
 
 const ExampleUI: NextPage = () => {
-  const { address } = useAccount();
   return (
     <>
       <MetaHeader title="User" description="Example UI created with 🏗 Scaffold-ETH 2, showcasing some of its features.">
@@ -18,15 +18,12 @@ const ExampleUI: NextPage = () => {
       </MetaHeader>
       <div className="" data-theme="">
         <BalanceContent isAdmin={false} />
-        <a className="btn btn-primary" href={`/blockexplorer/address/${address}`}>
-          Mis pagos
-        </a>
+        <ActionsUser />
         <div className="flex justify-center content-around flex-wrap">
           <Card cardId={"1234"} title={"Ascensor"} />
           <Card cardId={"8907"} title={"Piscinal"} />
           <Card cardId={"tgbh"} title={"Gym"} />
         </div>
-        <Pay />
       </div>
     </>
   );
