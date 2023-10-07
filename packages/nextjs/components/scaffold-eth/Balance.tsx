@@ -13,7 +13,10 @@ export const Balance = ({ address }: TBalanceProps) => {
   const configuredNetwork = getTargetNetwork();
   const { balance, price, isError, isLoading, onToggleBalance, isEthBalance } = useAccountBalance(address);
 
-  if (!address || isLoading || balance === null) {
+  if (!address) {
+    return <p className="text-sm">Connect a wallet</p>;
+  }
+  if (isLoading || balance === null) {
     return (
       <div className="animate-pulse flex space-x-4">
         <div className="rounded-md bg-slate-300 h-6 w-6"></div>
