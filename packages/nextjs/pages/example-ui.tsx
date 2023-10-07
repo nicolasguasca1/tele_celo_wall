@@ -18,7 +18,7 @@ const ExampleUI: NextPage = () => {
       <div className="" data-theme="">
         <BalanceComunity />
         <BalanceUser />
-        <a className="btn btn-wide" href={`/blockexplorer/address/${address}`}>
+        <a className="btn btn-primary" href={`/blockexplorer/address/${address}`}>
           Mis pagos
         </a>
         <div className="flex justify-center content-around flex-wrap">

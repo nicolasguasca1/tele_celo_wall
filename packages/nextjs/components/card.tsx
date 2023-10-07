@@ -31,7 +31,7 @@ export const Card = ({ cardId, title }: Card) => {
   });
 
   return (
-    <div className="card w-96 bg-neutral text-neutral-content m-5">
+    <div className="card w-96 bg-base-100 shadow-xl m-5">
       <div className="card-body items-center text-center">
         <h2 className="card-title">{title}</h2>
         <p>
