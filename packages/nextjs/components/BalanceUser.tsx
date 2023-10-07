@@ -1,4 +1,4 @@
-import { Balance } from "./scaffold-eth";
+import { Balance, FaucetButton } from "./scaffold-eth";
 import { useAccount } from "wagmi";
 
 export const BalanceUser = () => {
@@ -10,9 +10,7 @@ export const BalanceUser = () => {
       <div className="stat-value">
         <Balance address={address} />
       </div>
-      <div className="stat-actions">
-        <button className="btn btn-sm btn-success">Add funds</button>
-      </div>
+      <FaucetButton />
     </div>
   );
 };
