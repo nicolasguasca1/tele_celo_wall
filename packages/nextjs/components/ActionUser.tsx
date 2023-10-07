@@ -12,11 +12,11 @@ export const ActionsUser = () => {
   };
   return (
     <div className="flex flex-col">
-      <div className="flex justify-center m-5">
-        <a className="btn mt-5" href={`/blockexplorer/address/${address}`}>
+      <div className="flex justify-center m-3">
+        <a className="btn m-1" href={`/blockexplorer/address/${address}`}>
           Review my pays
         </a>
-        <div className="m-5">
+        <div className="m-1">
           <button onClick={handleButtonClick} className="btn btn-primary">
             Make a pay
           </button>
