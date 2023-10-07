@@ -5,7 +5,7 @@ const contracts = {
       name: "localhost",
       contracts: {
         YourContract: {
-          address: "0x0DCd1Bf9A1b36cE34237eEaFef220932846BCD82",
+          address: "0x0165878A594ca255338adfa4d48449f69242Eb8F",
           abi: [
             {
               inputs: [
@@ -113,6 +113,29 @@ const contracts = {
               type: "function",
             },
             {
+              inputs: [
+                {
+                  internalType: "string",
+                  name: "_idDerrama",
+                  type: "string",
+                },
+                {
+                  internalType: "address",
+                  name: "_address",
+                  type: "address",
+                },
+                {
+                  internalType: "uint256",
+                  name: "precio",
+                  type: "uint256",
+                },
+              ],
+              name: "payDerrama",
+              outputs: [],
+              stateMutability: "payable",
+              type: "function",
+            },
+            {
               inputs: [],
               name: "premium",
               outputs: [
@@ -178,6 +201,19 @@ const contracts = {
             {
               inputs: [],
               name: "totalCounter",
+              outputs: [
+                {
+                  internalType: "uint256",
+                  name: "",
+                  type: "uint256",
+                },
+              ],
+              stateMutability: "view",
+              type: "function",
+            },
+            {
+              inputs: [],
+              name: "totalMoney",
               outputs: [
                 {
                   internalType: "uint256",

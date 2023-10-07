@@ -22,6 +22,13 @@ contract YourContract {
 	mapping(address => uint) public userGreetingCounter;
 	mapping(address => mapping (string => string)) votes;
 	mapping(string => uint256) votesPositive;
+	mapping(address => uint256) usserMoney;
+
+	// cantidad dinero comunidad
+	uint256 public totalMoney;
+	//mapping derramas
+	mapping(string => mapping(address => uint256)) derramas;
+	mapping(address => mapping(string => uint256)) pagoDerramas;
 
 
 	// Events: a way to emit log statements from smart contract that can be listened to by external parties
@@ -36,6 +43,7 @@ contract YourContract {
 	// Check packages/hardhat/deploy/00_deploy_your_contract.ts
 	constructor(address _owner) {
 		owner = _owner;
+		totalMoney = 0;
 	}
 
 
@@ -120,5 +128,11 @@ contract YourContract {
 
 	function resultVote(string memory _idVote) view public returns(uint) {
 		return votesPositive[_idVote];
+	}
+
+	function payDerrama(string memory _idDerrama, address _address, uint256 precio) public payable{
+		derramas[_idDerrama][_address] = derramas[_idDerrama][_address] + precio;
+		totalMoney = totalMoney + precio;
+		pagoDerramas[_address][_idDerrama] = pagoDerramas[_address][_idDerrama] + precio;
 	}
 }
