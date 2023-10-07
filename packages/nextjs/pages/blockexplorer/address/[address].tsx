@@ -15,7 +15,6 @@ import {
 import { Address, Balance } from "~~/components/scaffold-eth";
 import deployedContracts from "~~/generated/deployedContracts";
 import { useFetchBlocks } from "~~/hooks/scaffold-eth";
-import { useWalletIsConnect } from "~~/hooks/scaffold-eth/useWalletIsConnect";
 import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 
 type AddressCodeTabProps = {
@@ -35,7 +34,6 @@ const publicClient = createPublicClient({
 });
 
 const AddressPage = ({ address, contractData }: PageProps) => {
-  useWalletIsConnect();
   const router = useRouter();
   const { idDerrama } = router.query;
   const { blocks, transactionReceipts, currentPage, totalBlocks, setCurrentPage } = useFetchBlocks();
