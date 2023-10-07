@@ -1,4 +1,5 @@
-import { useScaffoldContractRead } from "~~/hooks/scaffold-eth";
+import { useRouter } from "next/router";
+import { useDeployedContractInfo, useScaffoldContractRead } from "~~/hooks/scaffold-eth";
 
 interface CardAdmin {
   cardId: string;
@@ -6,6 +7,8 @@ interface CardAdmin {
 }
 
 export const CardAdmin = ({ cardId, title }: CardAdmin) => {
+  const router = useRouter();
+  const { data: deployedContractData, isLoading: deployedContractLoading } = useDeployedContractInfo("YourContract");
   const { data } = useScaffoldContractRead({
     contractName: "YourContract",
     functionName: "resultVote",
@@ -13,7 +16,10 @@ export const CardAdmin = ({ cardId, title }: CardAdmin) => {
   });
 
   return (
-    <div className="card w-96 bg-neutral text-neutral-content m-5">
+    <div
+      className="card w-96 bg-neutral text-neutral-content m-5"
+      onClick={() => router.push(`/blockexplorer/address/${deployedContractData.address}?idDerrama=${cardId}`)}
+    >
       <div className="card-body items-center text-center">
         <h2 className="card-title">{title}</h2>
         <p>

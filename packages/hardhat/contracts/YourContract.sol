@@ -16,27 +16,28 @@ contract YourContract {
 	// State Variables
 	uint256 numVecinos = 5;
 	address public immutable owner;
-	string public greeting = "Building Unstoppable Apps!!!";
-	bool public premium = false;
 	uint256 public totalCounter = 0;
 	mapping(address => uint) public userGreetingCounter;
 	mapping(address => mapping (string => string)) votes;
 	mapping(string => uint256) votesPositive;
-	mapping(address => uint256) usserMoney;
+	mapping(address => uint256) userMoney;
 
 	// cantidad dinero comunidad
 	uint256 public totalMoney;
 	//mapping derramas
-	mapping(string => mapping(address => uint256)) derramas;
-	mapping(address => mapping(string => uint256)) pagoDerramas;
+	mapping(string => mapping(address => uint256)) public derramas;
+	mapping(address => mapping(string => uint256)) public pagoDerramas;
 
-
-	// Events: a way to emit log statements from smart contract that can be listened to by external parties
-	event GreetingChange(
-		address indexed greetingSetter,
-		string newGreeting,
-		bool premium,
+	event PagoDerramas(
+		address indexed userFlat,
+		string indexed derrama,
 		uint256 value
+	);
+
+	event VotosPropuestas(
+		string indexed idDerrama,
+		address indexed userFlat,
+		string value
 	);
 
 	// Constructor: Called once on contract deployment
@@ -53,36 +54,6 @@ contract YourContract {
 		// msg.sender: predefined variable that represents address of the account that called the current function
 		require(msg.sender == owner, "Not the Owner");
 		_;
-	}
-
-	/**
-	 * Function that allows anyone to change the state variable "greeting" of the contract and increase the counters
-	 *
-	 * @param _newGreeting (string memory) - new greeting to save on the contract
-	 */
-	function setGreeting(string memory _newGreeting) public payable {
-		// Print data to the hardhat chain console. Remove when deploying to a live network.
-		console.log(
-			"Setting new greeting '%s' from %s",
-			_newGreeting,
-			msg.sender
-		);
-
-
-		// Change state variables
-		greeting = _newGreeting;
-		totalCounter += 1;
-		userGreetingCounter[msg.sender] += 1;
-
-		// msg.value: built-in global variable that represents the amount of ether sent with the transaction
-		if (msg.value > 0) {
-			premium = true;
-		} else {
-			premium = false;
-		}
-
-		// emit: keyword used to trigger an event
-		emit GreetingChange(msg.sender, _newGreeting, msg.value > 0, 0);
 	}
 
 	/**
@@ -113,6 +84,7 @@ contract YourContract {
 		if(keccak256(abi.encodePacked("OK")) == keccak256(abi.encodePacked(_vote))) {
 			votesPositive[_idVote] = votesPositive[_idVote]++;
 		}
+		emit VotosPropuestas(_idVote, msg.sender, _vote);
 	}
 
 	 /**
@@ -132,7 +104,10 @@ contract YourContract {
 
 	function payDerrama(string memory _idDerrama, address _address, uint256 precio) public payable{
 		derramas[_idDerrama][_address] = derramas[_idDerrama][_address] + precio;
+		
 		totalMoney = totalMoney + precio;
+		
 		pagoDerramas[_address][_idDerrama] = pagoDerramas[_address][_idDerrama] + precio;
+		emit PagoDerramas(_address, _idDerrama, precio);
 	}
 }

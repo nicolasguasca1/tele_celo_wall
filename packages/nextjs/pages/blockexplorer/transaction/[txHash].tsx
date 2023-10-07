@@ -12,7 +12,7 @@ const TransactionPage: NextPage = () => {
 
   const router = useRouter();
   const { txHash } = router.query as { txHash?: `0x${string}` };
-  const [transaction, setTransaction] = useState<Transaction>();
+  const [transaction, setTransaction] = useState<any>();
   const [receipt, setReceipt] = useState<TransactionReceipt>();
   const [functionCalled, setFunctionCalled] = useState<string>();
 
@@ -35,6 +35,8 @@ const TransactionPage: NextPage = () => {
       fetchTransaction();
     }
   }, [client, txHash]);
+
+  console.log("transaction", transaction);
 
   return (
     <div className="container mx-auto mt-10 mb-20 px-10 md:px-0">
@@ -86,7 +88,7 @@ const TransactionPage: NextPage = () => {
                   <strong>Value:</strong>
                 </td>
                 <td>
-                  {formatEther(transaction.value)} {configuredNetwork.nativeCurrency.symbol}
+                  {formatEther(transaction.functionArgs[2])} {configuredNetwork.nativeCurrency.symbol}
                 </td>
               </tr>
               <tr>

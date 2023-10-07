@@ -25,6 +25,7 @@ type AddressCodeTabProps = {
 type PageProps = {
   address: string;
   contractData: AddressCodeTabProps | null;
+  idDerrama: string;
 };
 
 const publicClient = createPublicClient({
@@ -34,6 +35,7 @@ const publicClient = createPublicClient({
 
 const AddressPage = ({ address, contractData }: PageProps) => {
   const router = useRouter();
+  const { idDerrama } = router.query;
   const { blocks, transactionReceipts, currentPage, totalBlocks, setCurrentPage } = useFetchBlocks();
   const [activeTab, setActiveTab] = useState("transactions");
   const [isContract, setIsContract] = useState(false);
@@ -52,7 +54,23 @@ const AddressPage = ({ address, contractData }: PageProps) => {
       if (typeof tx === "string") {
         return false;
       }
-      return tx.from.toLowerCase() === address.toLowerCase() || tx.to?.toLowerCase() === address.toLowerCase();
+      return (
+        (tx.from.toLowerCase() === address.toLowerCase() || tx.to?.toLowerCase() === address.toLowerCase()) &&
+        tx.functionName === "payDerrama"
+      );
+    }),
+  );
+
+  const votosDerrama = blocks.filter(block =>
+    block.transactions.some(tx => {
+      if (typeof tx === "string") {
+        return false;
+      }
+      return (
+        (tx.from.toLowerCase() === address.toLowerCase() || tx.to?.toLowerCase() === address.toLowerCase()) &&
+        tx.functionName === "saveVote" &&
+        tx.functionArgs[1] === idDerrama
+      );
     }),
   );
 
@@ -107,14 +125,28 @@ const AddressPage = ({ address, contractData }: PageProps) => {
         </div>
       )}
       {activeTab === "transactions" && (
-        <div className="pt-4">
-          <TransactionsTable blocks={filteredBlocks} transactionReceipts={transactionReceipts} />
-          <PaginationButton
-            currentPage={currentPage}
-            totalItems={Number(totalBlocks)}
-            setCurrentPage={setCurrentPage}
-          />
-        </div>
+        <>
+          <div className="pt-4">
+            <h2>Pagos</h2>
+            <TransactionsTable blocks={filteredBlocks} transactionReceipts={transactionReceipts} isVotes={false} />
+            <PaginationButton
+              currentPage={currentPage}
+              totalItems={Number(filteredBlocks.length)}
+              setCurrentPage={setCurrentPage}
+            />
+          </div>
+          {isContract && (
+            <div className="pt-4">
+              <h2>Votos</h2>
+              <TransactionsTable blocks={votosDerrama} transactionReceipts={transactionReceipts} isVotes={true} />
+              <PaginationButton
+                currentPage={currentPage}
+                totalItems={Number(votosDerrama.length)}
+                setCurrentPage={setCurrentPage}
+              />
+            </div>
+          )}
+        </>
       )}
       {activeTab === "code" && contractData && (
         <AddressCodeTab bytecode={contractData.bytecode} assembly={contractData.assembly} />
