@@ -52,8 +52,12 @@ export const NETWORKS_EXTRA_DATA: Record<string, TChainAttributes> = {
     color: "#1969ff",
   },
   [chains.scrollSepolia.id]: {
-    color: '#fbebd4'
-  }
+    color: "#fbebd4",
+  },
+  [chains.celoAlfajores.id]: {
+    color: "#92D9FA",
+    nativeCurrencyTokenAddress: "0xF194afDf50B03e69Bd7D057c1Aa9e10c9954E4C9",
+  },
 };
 
 /**
