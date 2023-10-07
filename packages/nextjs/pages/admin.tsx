@@ -2,8 +2,10 @@ import type { NextPage } from "next";
 import { BalanceContent } from "~~/components/BalanceContent";
 import { MetaHeader } from "~~/components/MetaHeader";
 import { CardAdmin } from "~~/components/card-admin";
+import { useWalletIsConnect } from "~~/hooks/scaffold-eth/useWalletIsConnect";
 
 const Admin: NextPage = () => {
+  useWalletIsConnect();
   return (
     <>
       <MetaHeader

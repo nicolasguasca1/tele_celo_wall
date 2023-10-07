@@ -5,9 +5,11 @@ import { Transaction, TransactionReceipt, formatEther, formatUnits } from "viem"
 import { usePublicClient } from "wagmi";
 import { hardhat } from "wagmi/chains";
 import { Address } from "~~/components/scaffold-eth";
+import { useWalletIsConnect } from "~~/hooks/scaffold-eth/useWalletIsConnect";
 import { decodeTransactionData, getFunctionDetails, getTargetNetwork } from "~~/utils/scaffold-eth";
 
 const TransactionPage: NextPage = () => {
+  useWalletIsConnect();
   const client = usePublicClient({ chainId: hardhat.id });
 
   const router = useRouter();

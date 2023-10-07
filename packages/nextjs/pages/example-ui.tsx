@@ -1,14 +1,13 @@
 import type { NextPage } from "next";
-import { useAccount } from "wagmi";
 import { ActionsUser } from "~~/components/ActionUser";
-import { BalanceComunity } from "~~/components/BalanceComunity";
 import { BalanceContent } from "~~/components/BalanceContent";
-import { BalanceUser } from "~~/components/BalanceUser";
 import { MetaHeader } from "~~/components/MetaHeader";
 import { Card } from "~~/components/card";
-import { Pay } from "~~/components/pay";
+import { useWalletIsConnect } from "~~/hooks/scaffold-eth/useWalletIsConnect";
 
 const ExampleUI: NextPage = () => {
+  useWalletIsConnect();
+
   return (
     <>
       <MetaHeader title="User" description="Example UI created with 🏗 Scaffold-ETH 2, showcasing some of its features.">

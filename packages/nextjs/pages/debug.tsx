@@ -3,6 +3,7 @@ import type { NextPage } from "next";
 import { useLocalStorage } from "usehooks-ts";
 import { MetaHeader } from "~~/components/MetaHeader";
 import { ContractUI } from "~~/components/scaffold-eth";
+import { useWalletIsConnect } from "~~/hooks/scaffold-eth/useWalletIsConnect";
 import { ContractName } from "~~/utils/scaffold-eth/contract";
 import { getContractNames } from "~~/utils/scaffold-eth/contractNames";
 
@@ -10,6 +11,7 @@ const selectedContractStorageKey = "scaffoldEth2.selectedContract";
 const contractNames = getContractNames();
 
 const Debug: NextPage = () => {
+  useWalletIsConnect();
   const [selectedContract, setSelectedContract] = useLocalStorage<ContractName>(
     selectedContractStorageKey,
     contractNames[0],
