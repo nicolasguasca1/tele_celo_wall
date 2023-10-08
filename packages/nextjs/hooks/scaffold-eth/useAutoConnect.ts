@@ -46,6 +46,11 @@ const getInitialConnector = (
       }
 
       const connector = connectors.find(f => f.id === previousWalletId);
+      console.log("reached thiiiiis");
+      return { connector };
+    } else {
+      const connector = connectors.find(f => f.id === previousWalletId);
+      console.log("reached thiiiiis");
       return { connector };
     }
   }

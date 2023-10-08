@@ -24,7 +24,7 @@ export const NFTComponent = () => {
                   marginTop: "10px",
                 }}
               >
-                You own {ownedNfts?.[0]?.quantityOwned || "0"} Kittens
+                You own {ownedNfts?.[0]?.quantityOwned || "0"} Tickets
               </p>
               <Web3Button
                 contractAddress={editionDropAddress}
@@ -47,7 +47,7 @@ export const NFTComponent = () => {
                 marginTop: "10px",
               }}
             >
-              Login to claim this Kitten!
+              Login to claim this Ticket!
             </p>
           )}
         </>
