@@ -31,16 +31,15 @@ export const ContractInteraction = () => {
             <span className="text-3xl">👋🏻</span>
             <div>
               <div>
-                In this page you can see how some of our <strong>hooks & components</strong> work, and how you can bring
-                them to life with your own design! Have fun and try it out!
+                Utiliza el botón <strong>Connect</strong> de esta página para loguearte a esta dapp
               </div>
-              <div className="mt-2">
+              {/* <div className="mt-2">
                 Check out{" "}
                 <code className="italic bg-base-300 text-base font-bold [word-spacing:-0.5rem]">
                   packages / nextjs/pages / example-ui.tsx
                 </code>{" "}
                 and its underlying components.
-              </div>
+              </div> */}
             </div>
           </div>
           <button
