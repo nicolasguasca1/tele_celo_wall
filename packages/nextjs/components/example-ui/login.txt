@@ -1,0 +1,39 @@
+import { useState } from "react";
+import * as React from "react";
+import { Spinner } from "~~/components/assets/Spinner";
+
+type LoginProps = {
+  isOpen: boolean;
+  onClose: () => void;
+};
+
+export const Login: React.FC<LoginProps> = ({ isOpen, onClose }) => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [signer, setSigner] = useState<any>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [loadingStatus, setIsLoadingStatus] = useState("");
+  const [error, setError] = useState("");
+
+  if (!isOpen) return null;
+
+  const handleOutsideClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.currentTarget === e.target) {
+      onClose();
+    }
+  };
+  return username && signer ? (
+    <>If connected</>
+  ) : isLoading ? (
+    <>
+      <div className="mt-14">
+        <Spinner width="50px" height="50px" />
+      </div>
+      <p>{loadingStatus}</p>
+    </>
+  ) : error ? (
+    <>If error</>
+  ) : (
+    <>Loading modal</>
+  );
+};
