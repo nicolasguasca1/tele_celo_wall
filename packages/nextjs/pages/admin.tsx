@@ -19,8 +19,8 @@ const Admin: NextPage = () => {
       <div className="" data-theme="">
         <BalanceContent isAdmin={true} />
         <div className="flex justify-center content-around flex-wrap">
-          <CardAdmin cardId={"1234"} title={"Ascensor"} />
-          <CardAdmin cardId={"8907"} title={"Piscinal"} />
+          <CardAdmin cardId={"1234"} title={"Lift"} />
+          <CardAdmin cardId={"8907"} title={"Pool"} />
           <CardAdmin cardId={"tgbh"} title={"Gym"} />
         </div>
       </div>

@@ -127,7 +127,7 @@ const AddressPage = ({ address, contractData }: PageProps) => {
       {activeTab === "transactions" && (
         <>
           <div className="pt-4">
-            <h2>Pagos</h2>
+            <h2>Payments</h2>
             <TransactionsTable blocks={filteredBlocks} transactionReceipts={transactionReceipts} isVotes={false} />
             <PaginationButton
               currentPage={currentPage}
@@ -137,13 +137,17 @@ const AddressPage = ({ address, contractData }: PageProps) => {
           </div>
           {isContract && (
             <div className="pt-4">
-              <h2>Votos</h2>
-              <TransactionsTable blocks={votosDerrama} transactionReceipts={transactionReceipts} isVotes={true} />
-              <PaginationButton
-                currentPage={currentPage}
-                totalItems={Number(votosDerrama.length)}
-                setCurrentPage={setCurrentPage}
-              />
+              <h2>Votes</h2>
+              {votosDerrama.length > 0 && (
+                <>
+                  <TransactionsTable blocks={votosDerrama} transactionReceipts={transactionReceipts} isVotes={true} />
+                  <PaginationButton
+                    currentPage={currentPage}
+                    totalItems={Number(votosDerrama.length)}
+                    setCurrentPage={setCurrentPage}
+                  />
+                </>
+              )}
             </div>
           )}
         </>

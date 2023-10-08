@@ -19,8 +19,8 @@ const ExampleUI: NextPage = () => {
         <BalanceContent isAdmin={false} />
         <ActionsUser />
         <div className="flex justify-center content-around flex-wrap">
-          <Card cardId={"1234"} title={"Ascensor"} />
-          <Card cardId={"8907"} title={"Piscinal"} />
+          <Card cardId={"1234"} title={"Lift"} />
+          <Card cardId={"8907"} title={"Pool"} />
           <Card cardId={"tgbh"} title={"Gym"} />
         </div>
       </div>

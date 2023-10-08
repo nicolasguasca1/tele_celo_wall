@@ -41,7 +41,7 @@ export const Card = ({ cardId, title }: Card) => {
               Lorem ipsum dolor sit amet consectetur adipiscing elit, in pulvinar luctus class habitant primis massa,
               nascetur gravida faucibus hendrerit ornare volutpat.
             </p>
-            {yourVote && <div>You vote is: {yourVote === "OK" ? "Vote OK" : "Vote KO"}</div>}
+            {yourVote && <div>Your vote is: {yourVote === "OK" ? "Vote OK" : "Vote KO"}</div>}
 
             {!yourVote && (
               <div className="card-actions justify-end">
